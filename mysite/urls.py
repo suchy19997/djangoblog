@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path(r'^post/(d+)$'.admin.site.urls),
     path('',include("apka.urls")),
+    path('VR',include("apka.urls")),
 ]

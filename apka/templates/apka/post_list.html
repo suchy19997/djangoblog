@@ -6,125 +6,35 @@
         </head>
 
         <body>
-            <p>to jest akapit</p><br>
-            <h1>A to jest heder</h1><br>
-            <h2>A to też jest heder</h2><br>
-            <img src="C:\Users\szyca\djangoblog\apka\templates\apka\zdjecie.jpg" alt="background" width="500" height="600">
-            <em>to jest wyrózniony tekst</em><br>
-            <strong> TO jest pogrubiony tekst</strong><br>
+            <div>
+                <p>to jest akapit</p>
+                <h1>A to jest heder</h1>
+                <h2>A to też jest heder</h2>
+                <img src="C:\Users\szyca\djangoblog\apka\templates\apka\zdjecie.jpg" alt="background" width="500" height="600">
+                <em>to jest wyrózniony tekst</em><br>
+                <strong> TO jest pogrubiony tekst</strong><br>
+            </div>
             <a href="https://streafakursow.pl">LINK_DO_KURSU</a>
             <ul>
                 <li>element 1 listy</li>
                 <li>element 2 listy</li>
             </ul>
+            <div>
+                {{ posts }}
+
+                {% for post in posts %}
+            </div>
+            <div>
+                <p>opublikowany: {{ post.publish_date }} </p>
+                <h2><a href="">{{ post.title }} </a> </h2>
+                <em> {{ post.text|linebreaksbr }}</em>
+            </div>
+
+        {% endfor %}
+        <br>
         </body>
 
 
-
-
-<script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-    	<script>
-    AFRAME.registerComponent('zoom-controls', {
-      schema:{
-        min:{type:"number", default: 5},
-        max: {type:"number", default: 120}
-      },
-      init: function(){
-          let self = this;
-          let sceneEl = document.querySelector("a-scene");
-          self.camera = sceneEl.querySelector("#camera");
-        console.log('min: ', self.data.min);
-        console.log('max: ', self.data.max);
-          window.addEventListener("wheel", event =>{
-              let amount = Math.sign(event.deltaY)*5 ;
-              let fov = Number(self.camera.getAttribute('camera').fov);
-              let adjust = amount + fov;
-              if(adjust < self.data.min) {adjust = self.data.min;}
-              if (adjust > self.data.max) {adjust = self.data.max;}
-            console.log('zoom: ', adjust);
-              self.camera.setAttribute('camera', 'fov', adjust);
-          });
-      }
-    });
-    </script>
-<a-scene>
-  <!-- Default lighting injected by A-Frame. -->
-  <a-entity light="type: ambient; color: #BBB"></a-entity>
-  <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
-  <a-entity light="type: ambient; color: #CCC"></a-entity>
-  <a-entity light="type: directional; color: #EEE; intensity: 0.5" position="-1 1 0"></a-entity>
-  <a-entity light="type: point; intensity: 0.75; distance: 150; decay: 2" position="0 10 10"></a-entity>
-
-  <a-box color="blue" depth="2" height="2" width="2">
-        <a-animation attribute="rotation"
-               dur="3000"
-               to="0 360 0"
-               repeat="indefinite">
-        </a-animation>
-        <a-animation attribute="position"
-               dur="3000"
-               from="-5 0 0"
-               to="5 0 0"
-               repeat="indefinite">
-        </a-animation>
-       <a-animation attribute="material.color" from="blue" to="red" dur="3000" repeat="indefinite"></a-animation>
-     </a-box>
-     <a-sky color="lightyellow"></a-sky>
-     <a-camera position="0 0 3" user-height="0"></a-camera>
-  <a-ring color="red" depth="3" height="3" width="3">
-            <a-animation attribute="rotation"
-               dur="3000"
-               to="0 360 0"
-               repeat="indefinite">
-        </a-animation>
-        <a-animation attribute="position"
-               dur="3000"
-               from="0 0 0"
-               to="0 -0 0"
-               repeat="indefinite">
-        </a-animation>
-       <a-animation attribute="material.color" from="rgb(78,255,0)" to="red" dur="300" repeat="indefinite"></a-animation>
-  </a-ring>
-    <a-sphere color="red" depth="2" height="2" width="2">
-            <a-animation attribute="rotation"
-               dur="3000"
-               to="0 360 0"
-               repeat="indefinite">
-        </a-animation>
-        <a-animation attribute="position"
-               dur="3000"
-               from="0 5 0"
-               to="0 -5 0"
-               repeat="indefinite">
-        </a-animation>
-       <a-animation attribute="material.color" from="rgb(4,255,0)" to="red" dur="300" repeat="indefinite"></a-animation>
-  </a-sphere>
-  <a-assets>
-    <a-mixin id="red" material="color: red"></a-mixin>
-    <a-mixin id="blue" material="color: blue"></a-mixin>
-    <a-mixin id="box" geometry="primitive: box"></a-mixin>
-
-    <!-- You got until the count of 2 to load else the show will go on without you. -->
-    <img id="panoCar" src="https://cdn.glitch.com/751cb2eb-ba18-49a9-ad9d-ba9555b7f1fb%2Fauto_stop_spherical_pano.jpg?v=1573144646164" ></a-assets>
-  <a-sky src="#panoCar"></a-sky>
-
-    <a-entity mixin="red box"></a-entity>
-    <a-entity mixin="blue box"></a-entity>
-  <a-entity id="rig" position="0 -5 15">
-  <a-camera id="camera">
-    <a-entity  camera="active: true" look-controls zoom-controls="min:5; max: 140" fov="100" position="0 0 0"></a-entity>
-       <a-cursor> id="cursor" material="color: red"</a-cursor>
-  </a-camera>
-      <a-entity cursor="fuse: true; fuseTimeout: 5000" position="0 1 -7" geometry="primitive: ring" material="color: rgb(255,240,0); shader: flat">
-      <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
-      <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
-    </a-entity>
-    <a-torus
-             position="0 1 -7"
-             color="#43A367" arc="230" radius="5" radius-tubular="0.1"></a-torus>
-
-</a-entity>
-</a-scene>
 
 
 
