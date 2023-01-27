@@ -1,41 +1,22 @@
-<!DOCTYPE html>
-    <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Strona Kacpra Sucheckiego</title>
-        </head>
-
-        <body>
-            <div>
-                <p>to jest akapit</p>
-                <h1>A to jest heder</h1>
-                <h2>A to też jest heder</h2>
-                <img src="C:\Users\szyca\djangoblog\apka\templates\apka\zdjecie.jpg" alt="background" width="500" height="600">
-                <em>to jest wyrózniony tekst</em><br>
-                <strong> TO jest pogrubiony tekst</strong><br>
-            </div>
-            <a href="https://streafakursow.pl">LINK_DO_KURSU</a>
-            <ul>
-                <li>element 1 listy</li>
-                <li>element 2 listy</li>
-            </ul>
-            <div>
-                {{ posts }}
-
-                {% for post in posts %}
-            </div>
-            <div>
-                <p>opublikowany: {{ post.publish_date }} </p>
+{% extends 'apka/base.html' %}
+{% block content %}
+{% for post in posts %}
+        <div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="post">
+                <div class="data">
+                    <p>opublikowany: {{ post.publish_date }} </p>
+                </div>
+                <div class="tresc">
                 <h2><a href="">{{ post.title }} </a> </h2>
-                <em> {{ post.text|linebreaksbr }}</em>
+
+
+                    <em> {{ post.text|linebreaksbr }}</em>
+                    </div>
+                </div>
             </div>
-
-        {% endfor %}
-        <br>
-        </body>
-
-
-
-
-
-</html>
+        </div>
+</div>
+    {% endfor %}
+    {% endblock %}
