@@ -9,7 +9,7 @@
                     <p>opublikowany: {{ post.publish_date }} </p>
                 </div>
                 <div class="tresc">
-                <h2><a href="">{{ post.title }} </a> </h2>
+                <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }} </a> </h2>
 
 
                     <em> {{ post.text|linebreaksbr }}</em>
