@@ -42,3 +42,7 @@ def post_detail(request,pk):
     post=get_object_or_404(Post,pk= pk)
     return render(request,'apka/post_detail.html',{'post':post})
 # Create your views here.
+
+def error_404_view(request,exception):
+    data = {"name": 'BłĄD 404 ośnież stronę'}
+    return render(request, 'apka/404.html',data)
