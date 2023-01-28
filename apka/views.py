@@ -1,33 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Post
-from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy
-from apka.forms import PostForm
-from django.views.generic import DetailView
-from django.views.generic import TemplateView
 
-
-class Image(TemplateView):
-    form=PostForm
-    template_name = 'apka/Image.html'
-
-    def post(self,request, *args,**kwargs):
-        form = PostForm(request.POST,request.FILES)
-        if form.is_valid():
-            obj = form.save()
-            return HttpResponseRedirect(reverse_lazy('Image_Display', kwargs={'pk':obj.id}))
-
-        context = self.get_contaxt_data(form=form)
-        return self.render_to_response(context)
-
-    def get(self,request, *args, **kwargs):
-        return self.post(request,*args, **kwargs)
-
-class ImageDisplay(DetailView):
-    model = Post
-    template_name = 'apka/Image_Display.html'
-    context_object_name = 'Image'
+from .forms import PostForm
 
 
 def post_list(request):
