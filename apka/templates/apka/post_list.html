@@ -10,7 +10,7 @@
                 </div>
                 <div class="tresc">
                 <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }} </a> </h2>
-                    <img src="{{post.image.url }}" alt="Obraz" width="100px">
+                    <img src="{{post.image.url }}" alt="Obraz" width="100px" height="100px">
                     <em> {{ post.text|linebreaksbr }}</em>
                     </div>
                 </div>
