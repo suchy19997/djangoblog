@@ -19,7 +19,7 @@ from django.utils.encoding import force_str
 force_text = force_str
 
 def activation_sent_view(request):
-    return render(request, 'activation_sent.html')
+    return render(request, 'apka/activation_sent.html')
 def post_list(request):
     #posts=Post.objects.all()
     posts=Post.objects.filter(publish_date__lte=timezone.now()).order_by('publish_date')
