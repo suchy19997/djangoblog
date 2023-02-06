@@ -1,0 +1,12 @@
+{% extends 'apka/base.html' %}
+
+{% block content %}
+<div class="post">
+    {% if profile_data.user %}
+    <div class="date">
+        {{ profile_data.user }}
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import Post
-
-from .forms import PostForm
+from .models import Post,Profile_data
+from django.contrib import messages
+from django.contrib.auth import login, authenticate, logout
+from django.urls import reverse_lazy
+from .forms import PostForm, SignUpForm, ProfileForm
 
 
 def post_list(request):
@@ -49,3 +51,44 @@ def post_edit(request,pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'apka/post_edit.html',{'form': form})
+
+def sign_up(request):
+
+    form = SignUpForm(request.POST)
+    if form.is_valid():
+        user = form.save()
+        user.refresh_from_db()
+        user.profile.first_name = form.cleaned_data.get('first_name')
+        user.profile.last_name = form.cleaned_data.get('last_name')
+        user.save()
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return redirect('/')
+
+    else:
+        form = SignUpForm()
+    return render(request, 'apka/sign_up.html', {'form': form})
+    #
+
+def logout_request(request):
+    logout(request)
+    messages.info(request, "Wylogowałeś się.")
+    return redirect('/')
+def profile_edit(request,pk):
+
+    profile = get_object_or_404(Profile_data, pk=pk)
+    print(profile)
+    if request.method == "POST":
+        form = ProfileForm(request.POST, instance=profile)
+        #form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            profile = form.save(commit=False)
+
+            profile.save()
+            return redirect('profile_edit', pk=Profile_data.user)
+    else:
+        form = ProfileForm(instance=Profile_data)
+    #return render(request, 'apka/post_edit.html', {'form': form})
+    return render(request, 'apka/profile_edit.html',{'form': form})
