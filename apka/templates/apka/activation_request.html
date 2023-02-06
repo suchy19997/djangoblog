@@ -1,7 +1,6 @@
 {% autoescape off %}
-Hi {{ user.username }},
+Cześć {{ user.username }},
 
-Please click the following link to confirm your registration:
-
+Wiadomość wygenerowana automatycznie kliknij w link by aktywować konto:
 http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
 {% endautoescape %}

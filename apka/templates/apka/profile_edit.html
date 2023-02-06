@@ -2,10 +2,12 @@
 
 {% block content %}
 <div class="post">
-    {% if profile_data.user %}
+    {% if user.username == form.instance.username %}
     <div class="date">
-        {{ profile_data.user }}
+        {{ user.username }}
     </div>
+      <p class="text-secondary">{{ form.instance.first_name }} {{ form.instance.last_name }}</p>
+                <p class="text-secondary">{{ form.instance.email }}</p>
     {% endif %}
 
 </div>
