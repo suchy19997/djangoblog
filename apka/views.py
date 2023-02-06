@@ -83,7 +83,7 @@ def sign_up(request):
         #password = form.cleaned_data.get('password1')
         #user = authenticate(username=username, password=password)
         #login(request, user)
-        message = render_to_string('activation_request.html', {
+        message = render_to_string('apka/activation_request.html', {
             'user': user,
             'domain': current_site.domain,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
