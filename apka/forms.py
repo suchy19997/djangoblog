@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Profile_data
+from .models import Post, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -21,5 +21,5 @@ class SignUpForm(UserCreationForm):
                   'email', 'password1', 'password2',)
 class ProfileForm(forms.ModelForm):
     class Meta:
-        model = Profile_data
+        model = Profile
         fields = ('first_name', 'last_name',)

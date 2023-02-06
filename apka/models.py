@@ -22,13 +22,14 @@ class Post(models.Model):
 
 
 
-class Profile_data(models.Model):
+class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name= models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
+    signup_confirmation = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
@@ -36,6 +37,6 @@ class Profile_data(models.Model):
     @receiver(post_save, sender=User)
     def update_profile_data_signal(sender, instance, created, **kwargs):
         if created:
-            Profile_data.objects.create(user=instance)
+            Profile.objects.create(user=instance)
         instance.profile.save()
 # Create your models here.
