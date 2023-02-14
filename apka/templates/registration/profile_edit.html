@@ -1,0 +1,47 @@
+{% extends 'apka/base.html' %}
+
+{% block content %}
+<div class="post">
+    {% if user.username == form.instance.username %}
+
+      <p class="text-secondary">{{ form.instance.first_name }} {{ form.instance.last_name }}</p>
+                <p class="text-secondary">{{ form.instance.email }}</p>
+    {% endif %}
+<h1>Twoje dane profilowe {{ user.username }}:</h1>
+
+
+</div>
+<div class="content">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class="small mb-1">Nazwa użytkownika:</label>
+                            {{ user_form.username }}
+                        <label class="small mb-1">Email:</label>
+                            {{ user_form.email }}
+                        <label class="small mb-1">Lokalizacja:</label> {{ profile_form.location }}
+
+                        <label class="small mb-1">Imię:</label> {{ user_form.first_name }}
+
+                        <label class="small mb-1">Nazwisko:</label> {{ user_form.last_name }}
+
+
+                        <label class="small mb-1">Lokalizacja:</label> {{ profile_form.location }}
+
+                        </br>
+                        <label class="small mb-1" , for="start">Data urodzenia:</label>
+
+                        <input type="date" id="start" name="trip-start"
+                        value={{ profile_form.birth_date }}>
+
+                        </div>
+                </div>
+            </div>
+            <br><br>
+            <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
+            <button type="reset" class="btn btn-dark btn-lg">Reset</button>
+        </form>
+    </div>
+{% endblock %}

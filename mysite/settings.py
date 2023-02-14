@@ -57,7 +57,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / ".apka/templates/registration"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,4 +136,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 PASSWORD_RESET_TIMEOUT=14400
+
+LOGIN_REDIRECT_URL = "/"
 

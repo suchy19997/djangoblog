@@ -1,0 +1,26 @@
+{% extends "apka/base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+  <h2>Rejestracja</h2>
+  <form method="post">
+    {% if form.errors %}
+            <h1>ERRORRRRRR same email again???</h1>
+            {% endif %}
+
+
+
+      {% if messages %}
+     {% for message in messages %}
+           <div class="alert alert-info display-flex align-items-center for-alert" role="alert">
+                <p class="alert-p"></p>{{ message }}</p>
+           </div>
+     {% endfor %}
+ {% endif %}
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Zarejestruj się!</button>
+  </form>
+{% endblock %}
