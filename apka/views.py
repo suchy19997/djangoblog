@@ -58,8 +58,8 @@ def post_edit(request,pk):
 
 
 def sign_up(request):
-
     form = SignUpForm(request.POST)
+
     if form.is_valid():
         if User.objects.filter(email=form.cleaned_data.get("email")).exists() or User.objects.filter(username=form.cleaned_data.get("username")).exists():
             print("sprawdzono")
